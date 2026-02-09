@@ -42,7 +42,7 @@ function guess(answer) {
 </script>
 
 <template>
-  <div>
+  <div class="app-wrapper">
     <h1>Guess-Ye😃</h1>
   
 
@@ -50,21 +50,29 @@ function guess(answer) {
 
     <p v-if="displayedQuote" class="quote">“{{ displayedQuote }}”</p>
 
+    <div class="buttonResult">
     <button @click="guess('kanye')">Kanye West</button>
     <button @click="guess('not-kanye')">Någon annan</button>
 
-    <p v-if="result" :class="['result', result === 'Rätt! 🎉' ? 'correct' : 'wrong']">
+    <h3 v-if="result" :class="['result', result === 'Rätt! 🎉' ? 'correct' : 'wrong']">
       {{ result }}
-    </p>
+    </h3>
+  </div>
   </div>
 </template>
 
-<style scoped>
+<style>
 * {
   box-sizing: border-box;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
   padding: 0;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
@@ -80,16 +88,31 @@ body {
   color: #333;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   min-height: 100vh;
   padding: 2rem;
 }
+
+
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center;     /* horizontal center */
+  text-align: center;
+}
+
 
 h2 {
   text-align: center;
   margin-bottom: 1.5rem;
   font-size: 2rem;
   color: #1a1a1a;
+}
+
+.whole {
 }
 
 .quote {
@@ -119,9 +142,10 @@ button {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: linear-gradient(135deg, #ff8a00, #e52e71);
+  background: #ff8a00;
   color: white;
   font-weight: bold;
+  
 }
 
 button:hover {
@@ -134,12 +158,19 @@ button:active {
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
+.buttonResult {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem; 
+}
+
 .result {
   font-size: 1.5rem;
   font-weight: bold;
-  text-align: center;
   margin-top: 1rem;
   animation: fadeIn 0.5s ease-in-out;
+  width: auto;
 }
 
 .result.correct {
