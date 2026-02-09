@@ -74,6 +74,14 @@ function guess(answer) {
   padding: 0;
 }
 
+h1 {
+  text-align: center;
+  color: #87CEEB;
+  margin-bottom: 1.5rem;
+  font-size: 4rem;
+  font-family: sans-serif;
+}
+
 body {
   background: #f5f5f5;
   color: #333;
