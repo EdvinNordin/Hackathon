@@ -8,11 +8,9 @@ const correctAnswer = ref('')
 const result = ref('')
 
 async function getDesignQuote() {
-  const response = await axios.get('https://quotesondesign.com/wp-json/wp/v2/posts/')
+const response = await axios.get('https://quotesondesign.com/wp-json/wp/v2/posts/')
 
-  console.log(response)
   const raw = response.data[0].content.rendered
-  console.log(raw)
   return raw.replace(/<[^>]+>/g, '').trim()
 }
 
@@ -43,7 +41,10 @@ function guess(answer) {
 
 <template>
   <div>
-    <h2>Vem sa detta?</h2>
+    <h1>Guess-Ye😃</h1>
+  <div>
+
+    <h2>Vem sa det här?</h2>
 
     <p v-if="displayedQuote" class="quote">“{{ displayedQuote }}”</p>
 
@@ -54,6 +55,7 @@ function guess(answer) {
       {{ result }}
     </p>
   </div>
+</div>
 </template>
 
 <style scoped>
@@ -72,6 +74,14 @@ body {
   align-items: flex-start;
   min-height: 100vh;
   padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  color: #87CEEB;
+  margin-bottom: 1.5rem;
+  font-size: 4rem;
+  font-family: sans-serif;
 }
 
 h2 {
