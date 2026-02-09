@@ -3,19 +3,30 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
 const info = ref(null)
+const insult = ref(null)
 
 onMounted(async () => {
   const response = await axios.get(
     'https://api.kanye.rest'
   )
-  info.value = response.data
+  info.value = response.data.quote
+
+  const evilinsult = await axios.get('https://api.adviceslip.com/advice')
+  insult.value = evilinsult.data.slip.advice
+
 })
 </script>
 
 
 <template>
- 
-  <p v-if="info">{{ info }}</p>
+ <div>
+  <div>
+  <p v-if=info>{{ info }}</p>
+  </div>
+  <div>
+  <p v-if=insult>{{ insult }}</p>
+  </div>
+</div>
 
 
 </template>
