@@ -8,9 +8,11 @@ const correctAnswer = ref('')
 const result = ref('')
 
 async function getDesignQuote() {
-  const response = await axios.get('https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand&per_page=1')
+  const response = await axios.get('https://quotesondesign.com/wp-json/wp/v2/posts/')
 
+  console.log(response)
   const raw = response.data[0].content.rendered
+  console.log(raw)
   return raw.replace(/<[^>]+>/g, '').trim()
 }
 
