@@ -1,20 +1,23 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+
+const info = ref(null)
+
+onMounted(async () => {
+  const response = await axios.get(
+    'https://api.kanye.rest'
+  )
+  info.value = response.data
+})
 </script>
 
+
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+ 
+  <p v-if="info">{{ info }}</p>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
 </template>
 
 <style scoped>
