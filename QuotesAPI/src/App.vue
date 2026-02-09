@@ -15,28 +15,36 @@ const response = await axios.get('https://quotesondesign.com/wp-json/wp/v2/posts
 }
 
 onMounted(async () => {
+  await newQuote()
+})
+
+async function newQuote(){
   const kanyeResponse = await axios.get('https://api.kanye.rest')
   const adviceResponse = await axios.get('https://api.adviceslip.com/advice')
-  const designQuote = await getDesignQuote()
+  const stoicResponse = await axios.get('https://corsproxy.io/?https://stoic.tekloon.net/stoic-quote')
 
   const kanyeQuote = kanyeResponse.data.quote
   const adviceQuote = adviceResponse.data.slip.advice
+  const stoicQuote = stoicResponse.data.data.quote
 
   const quotes = [
     { text: kanyeQuote, source: 'kanye' },
     { text: adviceQuote, source: 'not-kanye' },
-    { text: designQuote, source: 'not-kanye' }
+    { text: stoicQuote, source: 'not-kanye' }
   ]
-
  
   const randomIndex = Math.floor(Math.random() * quotes.length)
   displayedQuote.value = quotes[randomIndex].text
   correctAnswer.value = quotes[randomIndex].source
-})
+
+}
 
 function guess(answer) {
   result.value = answer === correctAnswer.value ? 'Rätt! 🎉' : 'Fel 😬'
+  newQuote()
 }
+
+
 </script>
 
 <template>
